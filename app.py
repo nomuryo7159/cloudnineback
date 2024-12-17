@@ -10,15 +10,7 @@ import requests
 # Azure Database for MySQL
 # REST APIでありCRUDを持っている
 app = Flask(__name__)
-
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "https://tech0-gen-8-step3-app-node-8.azurewebsites.net"
-        ],
-        "support_credentials": True
-    }
-})
+CORS(app)
 
 
 @app.route("/")
