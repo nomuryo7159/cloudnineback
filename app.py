@@ -10,14 +10,22 @@ import requests
 # Azure Database for MySQL
 # REST APIでありCRUDを持っている
 app = Flask(__name__)
-CORS(app)
- 
+
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://tech0-gen-8-step3-app-node-8.azurewebsites.net"
+        ],
+        "support_credentials": True
+    }
+})
+
 
 @app.route("/")
 def index():
     result = crud.myselect2()
     return "<p>Flask top page!</p>"
- 
+
 @app.route("/register/user", methods=['POST'])
 def create_register_user():
     values = request.get_json()
@@ -89,4 +97,5 @@ def recommend_customer():
 @app.route("/companies", methods=['GET'])
 def read_all_companies():
     result = crud.myselect2()
-    return json.dumps(result), 200    
+    return json.dumps(result), 200
+
